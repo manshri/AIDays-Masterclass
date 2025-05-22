@@ -37,6 +37,20 @@ def generate_finetune_data(num_sequences=1000, seq_length=10):
             data.append(''.join(chars))
     return data
 
+def generate_alternating_data(num_sequences=1000, seq_length=10):
+    data = []
+    for _ in range(num_sequences):
+        # Choose two different characters to alternate between
+        char1 = random.choice(string.ascii_letters)
+        char2 = random.choice(string.ascii_letters)
+        while char2 == char1:  # Ensure they're different
+            char2 = random.choice(string.ascii_letters)
+        
+        # Generate alternating sequence
+        seq = ''.join([char1 if i % 2 == 0 else char2 for i in range(seq_length)])
+        data.append(seq)
+    return data
+
 # ----------------------------
 # 2. Dataset and Tokenizer
 # ----------------------------
